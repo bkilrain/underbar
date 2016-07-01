@@ -114,7 +114,6 @@
     _.each(sortAndSplice, function(item, index) {
       if (sortAndSplice[index + 1] !== item) {
         uniqArray.push(item);
-        console.log(uniqArray);
       }
     });
     return uniqArray;
@@ -126,6 +125,11 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    var mappedArray = [];
+    for (var i = 0; i < collection.length; i++) {
+        mappedArray.push(iterator(collection[i], i, collection));
+      }
+    return mappedArray;
   };
 
   /*
