@@ -126,9 +126,9 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     var mappedArray = [];
-    for (var i = 0; i < collection.length; i++) {
-        mappedArray.push(iterator(collection[i], i, collection));
-      }
+    _.each(collection, function(item, index) {
+        mappedArray.push(iterator(item, index, collection));
+      });
     return mappedArray;
   };
 
