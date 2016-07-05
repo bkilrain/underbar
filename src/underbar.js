@@ -261,7 +261,7 @@
       }
       _.each(item, function(value, key) {
         if (!defaulted.hasOwnProperty(key)) {
-          defaulted[key] = defaulted[key] || value;
+          defaulted[key] = value;
         }
       });
     });
