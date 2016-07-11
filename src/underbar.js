@@ -387,6 +387,37 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    var sorted = [collection[0]]; //creates array to hold sorted values and starts it with first item
+
+    
+      _.each(collection, function(item, index) {
+        if (index >= 1) { //won't sort against itself in sorted array
+
+          var i = 0;
+          while (sorted.length < collection.length) {
+            
+        //gets method of comparison depending on string or function iterator
+            if (typeof iterator === 'string') {
+              var collectionItem = item[iterator];
+              var sortedItem = sorted[i][iterator];
+            } else {
+              var collectionItem = iterator(item);
+              var sortedItem = iterator(sorted[i]);
+            }
+
+          // compares items in sorted array to place current item
+            if (collectionItem < sortedItem || sortedItem === undefined) {
+              sorted.splice(i, 0, item);
+              return;
+            } else if (i === sorted.length - 1 || collectionItem === undefined) {
+              sorted.push(item);
+              break;
+            } 
+            i++; //advances index of sorted array
+          }
+        }
+      });
+      return sorted;
     
   };
 
