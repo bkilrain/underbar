@@ -370,6 +370,16 @@
   // Calls the method named by functionOrKey on each value in the list.
   // Note: You will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
+    return _.map(collection, function(item, index, collection) { // uses apply on the function object if
+      if (typeof functionOrKey === 'function') {                 // functionOrKey is a function. Otherwise
+        return functionOrKey.apply(item, args);                  // assumes it's a method and applies it
+      } else if (typeof item === 'string') {                     // to that item type's prototype... tests
+        return String.prototype[functionOrKey].apply(item);      // pass with just string type. Other types
+      } else if (typeof item === 'number') {                     // to be implemented...
+        return Number.prototype[functionOrKey].apply(item);
+      }
+      
+    });
   };
 
   // Sort the object's values by a criterion produced by an iterator.
@@ -377,6 +387,7 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    
   };
 
   // Zip together two or more arrays with elements of the same index
